@@ -1,0 +1,363 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Sans-Serif';
+    text-decoration: none;
+    list-style-type: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+hr {
+    margin: 5px 0;
+    border-color: #ccc;
+}
+
+a:visited {
+    color: inherit;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    padding: 0 100px 0 100px;
+    height: 100px;
+    background-color: wheat;
+    z-index: 10000;
+}
+
+.logo {
+    height: 50px;
+}
+
+.logo-image,
+.profile-image {
+    height: 50px;
+    width: 50px;
+}
+
+.logo-name {
+    color: blue;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.social-item {
+    padding-right: 7px;
+}
+
+.profile span {
+    font-size: 10px;
+    text-align: center;
+}
+
+.diaporama {
+    height: 400px;
+    background-color: green;
+    overflow-x: hidden;
+}
+
+.diapo-item {
+    height: 380px;
+    margin: 10px;
+}
+
+.diaporama img:first-child,
+.diaporama img:last-child {
+    height: 300px;
+}
+
+.menu {
+    background-color: red;
+}
+
+.menu-item {
+    width: 150px;
+    background-color: #1345d0;
+    text-align: center;
+}
+
+.menu-item a {
+    display: block;
+    padding: 10px;
+    color: white;
+}
+
+.menu-item:hover {
+    background-color: #13d036;
+}
+
+.menu-item:active {
+    padding: 10px 30px;
+    background-color: #d01313;
+}
+
+.content {
+    height: 500px;
+    background-color: aqua;
+}
+
+.marks {
+    padding: 40px;
+    display: grid;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mark {
+    position: relative;
+    overflow: hidden;
+    transition: height 1s;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mark:hover h1 {
+    display: block;
+}
+
+.mark img {
+    display: block;
+}
+
+.mark:hover img {
+    width: 100px;
+    height: 100px;
+}
+
+.mark h1 {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 1);
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: display 0.3s;
+}
+
+
+.comparer {
+    padding: 30px;
+    background-color: #13d036;
+    width: 100%;
+}
+
+.forms {
+    height: 530px;
+    width: 100%;
+}
+
+.compare-form {
+    width: 22%;
+    background: #fdfdfd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+        0 32px 64px -48px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease-in-out;
+}
+
+.compare-form:hover {
+    width: 30%;
+    height: 500px;
+}
+
+.compare-form .formy .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+/* .compare-form .formy .input input {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+} */
+
+.selector {
+    background-color: #d01313;
+}
+
+/* .form-box .formy .input input { */
+/* width: 100%;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+} */
+
+.form-box .formy .input .selector {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+#btn-compare {
+    background: #1345d0;
+    margin-top: 40px;
+    text-align: center;
+    width: 200px;
+    font-size: 16px;
+    color: #FFF;
+    padding: 12px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+}
+
+.compare-result {
+    height: 100vh;
+    width: 100%;
+}
+
+.cars-details {
+    width: 90%;
+    overflow: scroll;
+}
+
+.cars-names {
+    width: 90%;
+}
+
+.compare-result {
+    padding: 80px;
+}
+
+.cars-details table,
+.cars-names table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    border-right: 2px aliceblue solid;
+}
+
+td {
+    border-left: 2px aliceblue solid;
+    border-right: 2px aliceblue solid;
+}
+
+.cars-details table tr,
+.cars-names table tr {
+    border-bottom: 2px aliceblue solid;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.cars-names table th {
+    width: 20%;
+    text-align: center;
+}
+
+.cars-details table td {
+    width: 20%;
+    text-align: center;
+}
+
+.cars-names table th {
+    padding: 5px;
+}
+
+.cars-names table th img {
+    width: 100%;
+    height: 150px;
+}
+
+.cars-names table th h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.cars-details table tr td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    text-align: left;
+}
+
+.cars-details table tr td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.cars-details table td {
+    padding: 10px 20px 10px 20px;
+}
+
+.guide {
+    padding: 20px 70px;
+    background-color: #4D329C;
+}
+
+.guide-text {
+    margin-left: 70px;
+}
+
+footer {
+    height: 100px;
+    background-color: black;
+}
+
+
+/* BUTTONS */
+
+.btn {
+    background: #1345d0;
+    text-align: center;
+    height: 40px;
+    font-size: 16px;
+    color: #FFF;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-cancel {
+    background-color: white;
+    color: #1345d0;
+}
+
+.btn-confirm {
+    background-color: #1345d0;
+}
+
+.btn-delete {
+    background-color: #d01313;
+}

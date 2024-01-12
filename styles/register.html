@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style/auth.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box form-box">
+            <header>Register</header>
+            <form action="profile.html" method="post">
+                <div class="field input">
+                    <label for="firstname">First name</label>
+                    <input type="text" name="firstname" id="firstname" required>
+                </div>
+                <div class="field input">
+                    <label for="lastname">Last name</label>
+                    <input type="text" name="lastname" id="lastname" required>
+                </div>
+                <div class="field input">
+                    <label for="sex">Sex</label>
+                    <input type="radio" name="sex" value="Male" id="sex-male">
+                    <label for="sex-male">Male</label>
+                    <input type="radio" name="sex" value="Female" id="sex-female">
+                    <label for="sex-female">Female</label>
+                </div>
+                <div class="field input">
+                    <label for="birthdate">Birth date</label>
+                    <input type="date" name="birthdate" id="birthdate" required>
+                </div>
+                <div class="field input">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="field input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="field">
+                    <input type="submit" id="submit" name="submit" value="Register">
+                </div>
+                <div class="links">
+                    <p>Already have an account? <a href="login.html">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
