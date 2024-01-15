@@ -2,7 +2,7 @@
 
 require_once 'connection.php';
 
-class NewsNews extends Connection
+class NewsModel extends Connection
 {
 
     private function checkNewsIfExists($title)

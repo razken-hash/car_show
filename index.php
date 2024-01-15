@@ -5,14 +5,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CarShow</title>
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./flex-styles.css">
-    <!-- <link rel="stylesheet" href="./admin.css"> -->
+    
+    <link rel='stylesheet' href='/car_show/admin.css?v=<?php echo time(); ?>' />
+    <!-- <link rel='stylesheet' href='/car_show/styles.css?v=<?php echo time(); ?>' /> -->
+    <link rel="stylesheet" href="/car_show/flex-styles.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <?php require_once("./routers/routers.php") ?>
-    <!-- <script src="/cars-comparer-2cs-project/js/jquery-3.7.1.min.js"></script> -->
 </body>
 
 </html>
+
+<!-- 
+
+<?php
+        if (strpos($_SERVER['REQUEST_URI'], '/admin') != false) {
+            echo "<link rel='stylesheet' href='/car_show/admin.css?v=<?php echo time(); ?>'";
+        } else {
+            echo "<link rel='stylesheet' href='./styles.css?v=<?php echo time(); ?>'>";
+        }
+        ?>
+ -->

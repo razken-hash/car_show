@@ -2,8 +2,25 @@
 
 require_once 'connection.php';
 
-class UserModel extends Connection
+class UsersModel extends Connection
 {
+
+    public function loginUser($email, $password) {
+        $pdo = $this->connect();
+        $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['email' => $email, 'password' => $password]);
+
+        $result = $stmt->fetch();
+
+        $this->disconnect($pdo);
+
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     private function checkUserExists($email)
     {
@@ -149,19 +166,19 @@ class UserModel extends Connection
         $pdo = $this->connect();
 
         try {
-            $sql = "SELECT * FROM users WHERE userid = :userid AND status = 'blocked' OR status = 'pending'";
+            $sql = "SELECT * FROM users WHERE userid = :userid AND (status = 'Blocked' OR status = 'Pending')";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['userid' => $userid]);
 
             $result = $stmt->fetch();
 
-            $this->disconnect($pdo);
+            // $this->disconnect($pdo);
 
             if ($result) {
-                $pdo = $this->connect();
+                // $pdo = $this->connect();
 
                 try {
-                    $sql = "UPDATE users SET status = 'active'  WHERE id = :id";
+                    $sql = "UPDATE users SET status = 'Active' WHERE userid = :userid";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute(['userid' => $userid]);
 
@@ -170,7 +187,7 @@ class UserModel extends Connection
                     throw new ErrorException($e->getMessage());
                 }
             } else {
-                throw new ErrorException("User not found or already accepted");
+                throw new ErrorException("User not found or already blocked");
             }
         } catch (PDOException $e) {
             throw new ErrorException($e->getMessage());
@@ -182,19 +199,19 @@ class UserModel extends Connection
         $pdo = $this->connect();
 
         try {
-            $sql = "SELECT * FROM users WHERE userid = :userid AND status = 'active'";
+            $sql = "SELECT * FROM users WHERE userid = :userid AND (status = 'Active' OR status = 'Pending')";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['userid' => $userid]);
 
             $result = $stmt->fetch();
 
-            $this->disconnect($pdo);
+            // $this->disconnect($pdo);
 
             if ($result) {
-                $pdo = $this->connect();
+                // $pdo = $this->connect();
 
                 try {
-                    $sql = "UPDATE users SET status = 'blocked' WHERE userid = :userid";
+                    $sql = "UPDATE users SET status = 'Blocked' WHERE userid = :userid";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute(['userid' => $userid]);
 

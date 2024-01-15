@@ -22,6 +22,133 @@ a:visited {
     color: inherit;
 }
 
+/****** AMIN *******/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Sans-Serif';
+    text-decoration: none;
+    list-style-type: none;
+}
+
+/* *::-webkit-scrollbar {
+    display: none;
+} */
+
+/* .items {
+    width: 20%;
+    padding: 0px 20px;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    font-size: 20px;
+    padding: 10px 30px;
+    margin: 0px 20px;
+}
+
+.item:hover {
+    opacity: 0.8;
+    background-color: blue;
+    color: white;
+    border-radius: 22px;
+}
+
+.logo-admin {
+    height: 200px;
+    width: 100%;
+}
+
+.logo-image-admin,
+.profile-image-admin {
+    height: 50px;
+    width: 50px;
+}
+
+.logo-name-admin {
+    color: blue;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.data-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    width: 80%;
+    background-color: skyblue;
+    height: 100vh;
+}
+
+.admin-info-admin {
+    padding: 0px 10px;
+}
+
+input-admin {
+    width: 500px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.control-admin {
+    width: 100%;
+    padding: 20px 50px;
+}
+
+table {
+    width: 100%;
+}
+
+.datatable-admin {
+    background-color: red;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.attributes-admin {
+    height: 100px;
+    z-index: 100;
+}
+
+.attributes-admin table {
+    background-color: rgb(23, 6, 117);
+    border-start-start-radius: 20px;
+    border-start-end-radius: 20px;
+    color: white;
+    height: 100%;
+}
+
+.attributes-admin,
+.rows-admin {
+    width: 100%;
+    overflow: scroll;
+}
+
+.rows-admin table td {
+    color: white;
+    border-bottom: 1px black solid;
+}
+
+.attributes-admin table th,
+.rows-admin table td {
+    text-align: left;
+    padding: 15px 20px;
+} */
+
+
+/********? ***/
+
+
 header {
     position: sticky;
     top: 0;

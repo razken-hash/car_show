@@ -8,7 +8,6 @@ class HomeView {
         ClientTemplate::generateMenu();
         HomeView::generateMarksLogos(6, 160);
         $this->generateCompareSection(4);
-        // $this->gen();
         $this->generateGuide();
         ClientTemplate::generateFooter();
     }
@@ -16,9 +15,9 @@ class HomeView {
     public function generateDiaporama () {
         echo "
         <div class='diaporama row-center'>
-            <img class='diapo-item' src='assets/images/diapo1.jpg'>
-            <img class='diapo-item' src='assets/images/diapo4.jpg'>
-            <img class='diapo-item' src='assets/images/diapo3.jpg'>
+            <img class='diapo-item' src='/car_show/assets/images/diapo1.jpg'>
+            <img class='diapo-item' src='/car_show/assets/images/diapo4.jpg'>
+            <img class='diapo-item' src='/car_show/assets/images/diapo3.jpg'>
         </div>
         ";
     }
@@ -41,7 +40,7 @@ class HomeView {
     public static function generateMarkBox($boxSize) {
         echo "
         <div style='height:".$boxSize."px;' class='mark row-center'>
-            <a href='marks/audi'><img src='assets/images/marks/audi.png' alt=''></a>
+            <a href='marks/audi'><img src='/car_show/assets/images/marks/audi.png' alt=''></a>
             <h1>Audi</h1>
         </div>
         ";
@@ -66,7 +65,7 @@ class HomeView {
 
                 echo "
                 </div>
-                <input type='submit' class='btn' id='btn-compare'>Comparer</a>
+                <input type='submit' class='btn' id='btn-compare' value='Comparer'>
             </div>
         </form>
         ";
@@ -108,7 +107,7 @@ class HomeView {
     public function generateGuide () {
         echo "
         <div class='guide row-bet'>
-            <img src='assets/images/guide.png' alt=''>
+            <img src='/car_show/assets/images/guide.png' alt=''>
             <div class='guide-text col-center' style='align-items: left;'>
                 <h1>You want to Know more about Guide d'achat</h1>
                 <p>

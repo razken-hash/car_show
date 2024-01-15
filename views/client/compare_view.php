@@ -122,7 +122,7 @@ class CompareView {
 
     public function generateCarTH ($car, $mark) {
         echo "
-            <th><img src='assets/images/cars/hyunday.jpg'>
+            <th><img src='/car_show/assets/images/cars/hyunday.jpg'>
                 <h3>".$mark." ".$car[0]['carname']."</h3>
             </th>
         ";

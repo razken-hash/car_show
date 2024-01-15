@@ -69,7 +69,7 @@ class MarksModel extends Connection
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['markid' => $markid]);
 
-            $result = $stmt->fetch();
+            $result = $stmt->fetchAll();
 
             $this->disconnect($pdo);
 
@@ -96,28 +96,35 @@ class MarksModel extends Connection
 
     public function deleteMark($markid)
     {
+        $pdo = $this->connect();
 
         try {
-            $result = $this->getMarkById($markid);
+            $sql = "SELECT * FROM marks WHERE markid = :markid";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['markid' => $markid]);
+            $result = $stmt->fetch();
+            echo $result[0];
+            echo "red";
             if ($result) {
-                $pdo = $this->connect();
+                echo "ENETEr";
+                // $pdo = $this->connect();
+
                 try {
                     $sql = "DELETE FROM marks WHERE markid = :markid";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute(['markid' => $markid]);
-
                     $this->disconnect($pdo);
                 } catch (PDOException $e) {
                     throw new ErrorException($e->getMessage());
                 }
             } else {
-                throw new ErrorException("Mark not found");
+                echo "error";
+                throw new ErrorException("Mark not found or already blocked");
             }
         } catch (PDOException $e) {
             throw new ErrorException($e->getMessage());
         }
     }
-
     
     public function createMark($markname, $country, $headoffice, $foundyear, $logo)
     {
@@ -144,25 +151,29 @@ class MarksModel extends Connection
 
     public function updateMark($markid, $markname, $country, $headoffice, $foundyear, $logo)
     {
+        $pdo = $this->connect();
+
         try {
-            $result = $this->getMarkById($markid);
-
+            $sql = "SELECT * FROM marks WHERE markid = :markid";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['markid' => $markid]);
+            $result = $stmt->fetch();
             if ($result) {
-                $pdo = $this->connect();
-
                 try {
-                    $sql = "UPDATE marks SET markname = :markname, country = :country, headoffice = :headoffice, foundyear = :foundyear, logo = :logo) WHERE markid = :markid";
+                    $sql = "UPDATE marks SET markname = :markname, country = :country, headoffice = :headoffice, foundyear = :foundyear, logo = :logo WHERE markid = :markid";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute(['markname' => $markname, 'country' => $country, 'headoffice' => $headoffice, 'foundyear' => $foundyear, 'logo' => $logo, 'markid' => $markid]);
-
                     $this->disconnect($pdo);
                 } catch (PDOException $e) {
                     throw new ErrorException($e->getMessage());
                 }
             } else {
+                echo "error";
                 throw new ErrorException("Mark not found");
             }
         } catch (PDOException $e) {
+                echo "error33";
+
             throw new ErrorException($e->getMessage());
         }
     }

@@ -3,11 +3,12 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+01:00";
+DROP DATABASE car_show_db;
 CREATE DATABASE IF NOT EXISTS car_show_db;
 USE car_show_db;
 
 -- ADMINS
-DROP TABLE IF EXISTS admins;
+-- DROP TABLE IF EXISTS admins;
 CREATE TABLE IF NOT EXISTS admins (
     adminid INT PRIMARY KEY AUTO_INCREMENT,
     adminname VARCHAR(50),
@@ -26,17 +27,17 @@ CREATE TABLE IF NOT EXISTS users (
     lastname VARCHAR(50),
     sex VARCHAR(10),
     birthdate VARCHAR(50),
-    status VARCHAR(20), -- blocked vs non-blocked
+    status VARCHAR(20), -- blocked vs Pending
     email VARCHAR(50),
     pswd VARCHAR(50)
 );
 
 INSERT INTO users (firstname, lastname, sex, birthdate, status, email, pswd) VALUES
-("AbdErrazak", "KENNICHE", "Male", "1988-09-20", "non-blocked", "abderrazak.kenniche@domain.com", "passme"),
-("Hicham", "TIHAMI", "Male", "1992-04-15", "non-blocked", "hicham.tihami@domain.com", "pass456arabic"),
-("Mohammed", "GUERFI", "Male", "1985-11-10", "non-blocked", "mohammed.guerfi@domain.com", "secureArabicPass789"),
-("Anis", "BELHADEF", "Male", "1996-07-05", "non-blocked", "anis.belhadef@domain.com", "1234abcarabic"),
-("Aicha", "DERRAZ", "Female", "1990-02-18", "non-blocked", "ahmed.derraz@domain.com", "arabicqwerty567");
+("AbdErrazak", "KENNICHE", "Male", "1988-09-20", "Pending", "abderrazak.kenniche@domain.com", "passme"),
+("Hicham", "TIHAMI", "Male", "1992-04-15", "Pending", "hicham.tihami@domain.com", "pass456arabic"),
+("Mohammed", "GUERFI", "Male", "1985-11-10", "Pending", "mohammed.guerfi@domain.com", "secureArabicPass789"),
+("Anis", "BELHADEF", "Male", "1996-07-05", "Pending", "anis.belhadef@domain.com", "1234abcarabic"),
+("Aicha", "DERRAZ", "Female", "1990-02-18", "Pending", "ahmed.derraz@domain.com", "arabicqwerty567");
 
 -- MARKS
 -- DROP TABLE IF EXISTS marks;
@@ -68,7 +69,7 @@ CREATE TABLE IF NOT EXISTS cars (
     caryear VARCHAR(4),
     markid INT,
     rate INT DEFAULT 0,
-    FOREIGN KEY (markid) REFERENCES marks(markid) 
+    FOREIGN KEY (markid) REFERENCES marks(markid) ON DELETE CASCADE
 );
 
 
@@ -111,8 +112,8 @@ INSERT INTO cars (carname, carimage, cardescription, carversion, caryear, markid
 CREATE TABLE IF NOT EXISTS favorite_cars (
     carid INT,
     userid INT,
-    FOREIGN KEY (carid) REFERENCES cars(carid),
-    FOREIGN KEY (userid) REFERENCES users(userid)
+    FOREIGN KEY (carid) REFERENCES cars(carid) ON DELETE CASCADE,
+    FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE
 );
 
 -- FEATURES
@@ -142,8 +143,8 @@ CREATE TABLE carsfeatures (
     carid INT,
     featureid INT,
     featureval VARCHAR(200),
-    FOREIGN KEY (carid) REFERENCES cars(carid),
-    FOREIGN KEY (featureid) REFERENCES features(featureid)
+    FOREIGN KEY (carid) REFERENCES cars(carid) ON DELETE CASCADE,
+    FOREIGN KEY (featureid) REFERENCES features(featureid) ON DELETE CASCADE
 );
 
 -- Toyota Camry SE
@@ -399,26 +400,26 @@ INSERT INTO carsfeatures (carid, featureid, featureval) VALUES
 (18, 12, "5-star"); -- NCAP rating
 
 
--- -- NEWS
+-- NEWS
 -- DROP TABLE IF EXISTS news;
--- CREATE TABLE IF NOT EXISTS news (
---     newsid INT PRIMARY KEY AUTO_INCREMENT,
---     title VARCHAR(150),
---     summary VARCHAR(400),
---     article VARCHAR(2000),
---     image VARCHAR(50)
--- );
+CREATE TABLE IF NOT EXISTS news (
+    newsid INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(150),
+    summary VARCHAR(400),
+    content VARCHAR(2000),
+    image VARCHAR(50)
+);
 
--- INSERT INTO news (title, summary, article, image) VALUES
--- ("New Electric Car Models Unveiled at Auto Show", "Highlights from the latest auto show showcasing the future of electric vehicles.", "The recent auto show in the city unveiled several new electric car models from various manufacturers. These models promise improved range, faster charging, and innovative features. Industry experts believe that electric vehicles will continue to dominate the market in the coming years.", "electric_car_show.jpg"),
+INSERT INTO news (title, summary, content, image) VALUES
+("New Electric Car Models Unveiled at Auto Show", "Highlights from the latest auto show showcasing the future of electric vehicles.", "The recent auto show in the city unveiled several new electric car models from various manufacturers. These models promise improved range, faster charging, and innovative features. Industry experts believe that electric vehicles will continue to dominate the market in the coming years.", "electric_car_show.jpg"),
 
--- ("SpaceX Launches New Satellite for Global Internet Coverage", "SpaceX successfully launched a new satellite that aims to provide global internet coverage.", "SpaceX, the private space company founded by Elon Musk, successfully launched a new satellite into orbit. The satellite is part of SpaceX""s ambitious project to provide high-speed internet access to remote and underserved areas around the world. This launch marks another milestone for SpaceX and its mission to revolutionize global connectivity.", "spacex_satellite_launch.jpg"),
+("SpaceX Launches New Satellite for Global Internet Coverage", "SpaceX successfully launched a new satellite that aims to provide global internet coverage.", "SpaceX, the private space company founded by Elon Musk, successfully launched a new satellite into orbit. The satellite is part of SpaceX""s ambitious project to provide high-speed internet access to remote and underserved areas around the world. This launch marks another milestone for SpaceX and its mission to revolutionize global connectivity.", "spacex_satellite_launch.jpg"),
 
--- ("Health Experts Warn of New Flu Outbreak", "Health officials are monitoring a new strain of the flu virus that has the potential to cause a widespread outbreak.", "Health experts are closely monitoring a new strain of the flu virus that has emerged in several regions. Preliminary tests indicate that the new strain may be more contagious than previous variants. Authorities are urging the public to take precautions, such as getting vaccinated and practicing good hygiene, to prevent the spread of the virus.", "flu_outbreak_warning.jpg"),
+("Health Experts Warn of New Flu Outbreak", "Health officials are monitoring a new strain of the flu virus that has the potential to cause a widespread outbreak.", "Health experts are closely monitoring a new strain of the flu virus that has emerged in several regions. Preliminary tests indicate that the new strain may be more contagious than previous variants. Authorities are urging the public to take precautions, such as getting vaccinated and practicing good hygiene, to prevent the spread of the virus.", "flu_outbreak_warning.jpg"),
 
--- ("Tech Giants Announce Collaboration on AI Ethics Guidelines", "Leading technology companies join forces to develop ethical guidelines for artificial intelligence.", "Several leading technology companies, including Google, Microsoft, and Facebook, have announced a collaborative effort to develop ethical guidelines for the use of artificial intelligence. The initiative aims to address concerns about the potential risks and ethical implications of AI technology. Experts hope that these guidelines will help ensure the responsible and beneficial use of AI in various applications.", "ai_ethics_guidelines.jpg"),
+("Tech Giants Announce Collaboration on AI Ethics Guidelines", "Leading technology companies join forces to develop ethical guidelines for artificial intelligence.", "Several leading technology companies, including Google, Microsoft, and Facebook, have announced a collaborative effort to develop ethical guidelines for the use of artificial intelligence. The initiative aims to address concerns about the potential risks and ethical implications of AI technology. Experts hope that these guidelines will help ensure the responsible and beneficial use of AI in various applications.", "ai_ethics_guidelines.jpg"),
 
--- ("New Study Finds Benefits of Mediterranean Diet for Heart Health", "A new study highlights the benefits of the Mediterranean diet in reducing the risk of heart disease.", "A recent study published in a leading medical journal has found that following a Mediterranean diet can significantly reduce the risk of heart disease. The diet, which is rich in fruits, vegetables, whole grains, and olive oil, has long been associated with various health benefits. Researchers recommend adopting a Mediterranean-style eating pattern for improved heart health.", "mediterranean_diet_heart_health.jpg");
+("New Study Finds Benefits of Mediterranean Diet for Heart Health", "A new study highlights the benefits of the Mediterranean diet in reducing the risk of heart disease.", "A recent study published in a leading medical journal has found that following a Mediterranean diet can significantly reduce the risk of heart disease. The diet, which is rich in fruits, vegetables, whole grains, and olive oil, has long been associated with various health benefits. Researchers recommend adopting a Mediterranean-style eating pattern for improved heart health.", "mediterranean_diet_heart_health.jpg");
 
 -- -- OPINONS
 -- DROP TABLE IF EXISTS opinions;

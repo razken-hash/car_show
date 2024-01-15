@@ -5,20 +5,20 @@
             echo "
             <header class='row-bet'>
                 <div class='logo row-center'>
-                    <img class='logo-image' src='assets/images/logo.png' alt='Logo'>
+                    <img class='logo-image' src='/car_show/assets/images/logo.png' alt='Logo'>
                     <span class='logo-name'>arShow</span>
                 </div>
                 <div class='social'>
-                    <a class='social-item' href=''><img src='assets/icons/facebook.svg' alt='Facebook'></a>
-                    <a class='social-item' href=''><img src='assets/icons/instagram.svg' alt='Instagram'></a>
-                    <a class='social-item' href=''><img src='assets/icons/twitter.svg' alt='Twitter'></a>
-                    <a class='social-item' href=''><img src='assets/icons/youtube.svg' alt='Youtube'></a>
+                    <a class='social-item' href=''><img src='/car_show/assets/icons/facebook.svg' alt='Facebook'></a>
+                    <a class='social-item' href=''><img src='/car_show/assets/icons/instagram.svg' alt='Instagram'></a>
+                    <a class='social-item' href=''><img src='/car_show/assets/icons/twitter.svg' alt='Twitter'></a>
+                    <a class='social-item' href=''><img src='/car_show/assets/icons/youtube.svg' alt='Youtube'></a>
                 </div>
             ";
             if ($isAuth) {
                 echo "
                 <div class='profile col-center'>
-                    <a href='/auth/profile'><img class='profile-image' src='assets/icons/profile.svg' alt='Profile'></a>
+                    <a href='/auth/profile'><img class='profile-image' src='/car_show/assets/icons/profile.svg' alt='Profile'></a>
                     <span>My Profile</span>
                 </div>
                 ";

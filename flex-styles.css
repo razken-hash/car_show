@@ -26,6 +26,13 @@
     align-items: center;
 }
 
+.col-even-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .col-start-center {
     display: flex;
     flex-direction: column;
@@ -39,8 +46,6 @@
     justify-content: start;
     align-items: start;
 }
-
-
 
 .row-start {
     display: flex;

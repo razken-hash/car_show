@@ -1,11 +1,13 @@
 <?php
 
 require_once __DIR__ . '/../controller/admin_marks_controller.php';
+require_once __DIR__ . '/../controller/admin_cars_controller.php';
+require_once __DIR__ . '/../controller/admin_news_controller.php';
+require_once __DIR__ . '/../controller/admin_users_controller.php';
+require_once __DIR__ . '/../controller/auth_controller.php';
 
 require_once __DIR__ . '/../controller/home_controller.php';
 require_once __DIR__ . '/../controller/compare_controller.php';
-
-require_once __DIR__ . '/../views/admin/admin_marks_view.php';
 
 require_once __DIR__ . '/../views/client/auth_view.php';
 require_once __DIR__ . '/../views/client/home_view.php';
@@ -13,15 +15,17 @@ require_once __DIR__ . '/../views/client/marks_view.php';
 
 session_start();
 
+$user =  $_COOKIE['user'];
+
 $base_path = '/car_show';
 
 $request = $_SERVER['REQUEST_URI'];
 
-$route = rtrim(explode("?", $request)[0], "/");
+// Remove the base path from the request URI
+$route = substr($request, strlen($base_path));
 
-$route = substr($route, strlen($base_path));
-
-$user =  $_COOKIE['user'];
+// Remove query parameters from the route
+$route = strtok($route, '?');
 
 
 function checkRoles($roles)
@@ -41,227 +45,107 @@ function checkRoles($roles)
 
 switch ($route) {
     case '/auth/register':
-        if ($user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        $authView = new AuthView();
-        $authView->showRegisterView();
+        $authController = new AuthController();
+        $authController->registerUser();
         break;
     case '/auth/login':
-        if ($user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        $authViews = new AuthView();
-        $authViews->showLoginView();
+        $authController = new AuthController();
+        $authController->loginUser();
         break;
-    case '/admin':
-        if ($user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        // $adminView = new AdminView();
-        // $adminView->showAdminView();
-        break;
-    case '/admin/cars':
-        if (!$user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (!checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
 
-        // $adminCarsView = new AdminCarsView();
-        // $adminCarsView->showAdminCarsView();
+    case '/admin/cars':
+        $adminCarsController = new AdminCarsController();
+        $adminCarsController->displayAdminCarsView();
+        break;
+    case '/admin/cars/delete':
+        $adminCarsController = new AdminCarsController();
+        $adminCarsController->deleteCar();
         break;
     case '/admin/cars/create':
-        if (!$user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (!checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        // $adminCarsView = new AdminCarsView();
-        // $adminCarsView->showAdminCreateCarView();
+        $adminCarsController = new AdminCarsController();
+        $adminCarsController->createCar();
         break;
+
     case '/admin/marks':
-        if (!$user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (!checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        echo "hi";
-        // $adminMarksController = new AdminMarksController();
-        // $adminMarksController->displayMarksAdminView();
+        $adminMarksController = new AdminMarksController();
+        $adminMarksController->displayAdminMarksView();
         break;
     case '/admin/marks/create':
-        if (!$user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (!checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        // $adminMarksView = new AdminMarksView();
-        // $adminMarksView->showAdminCreateMarkView();
+        $adminMarksController = new AdminMarksController();
+        $adminMarksController->createMark();
         break;
-    case '/admin/news':
-        if (!$user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (!checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        // $adminNewsView = new AdminNewsView();
-        // $adminNewsView->showAdminNewsView();
+    case '/admin/marks/update':
+        $adminMarksController = new AdminMarksController();
+        $adminMarksController->updateMark();
         break;
-    case '/admin/news/create':
-        if (!$user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (!checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        // $adminNewsView = new AdminNewsView();
-        // $adminNewsView->showAdminCreateNewsView();
+    case '/admin/marks/delete':
+        $adminMarksController = new AdminMarksController();
+        $adminMarksController->deleteMark();
         break;
+
     case '/admin/users':
-        if (!$user) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        if (!checkRoles(['admin'])) {
-            header("Location: " . $base_path);
-            exit();
-        }
-        // $adminUsersView = new AdminUsersView();
-        // $adminUsersView->showAdminUsersView();
+        $adminUsersController = new AdminUsersController();
+        $adminUsersController->displayAdminUsersView();
+    break;
+    case '/admin/users/activate':
+        $adminUsersController = new AdminUsersController();
+        $adminUsersController->activateUser();
+    break;
+    case '/admin/users/block':
+        $adminUsersController = new AdminUsersController();
+        $adminUsersController->blockUser();
         break;
+
+    case '/admin/news':
+        $adminNewsController = new AdminNewsController();
+        $adminNewsController->displayAdminNewsView();
+        break;
+    case '/admin/news/delete':
+        $adminNewsController = new AdminNewsController();
+        $adminNewsController->deleteNews();
+        break;
+
+    case '/admin/reviews':
+        echo "Reviews";
+        break;
+
+    case '/admin/contacts':
+        echo "Contacts";
+        break;
+
 
     case '/home':
         header("Location: " . $base_path);
         break;
+
     case '/compare':
         $compareController = new CompareController();
         $compareController->displayCompareView();
         break;
+
     case '/marks':
-        $marksView = new MarksView();
-        $marksView->displayMarksView();
+        echo "Marks";
         break;
+
     case '/news':
         echo "News";
         break;
+
     case '/reviews':
         echo "Reviews";
         break;
+
     case '/guide':
         echo "Guide";
         break;
+
     case '/contact':
         echo "Contacts";
         break;
 
-    // case '/admin/reviews':
-    //     if (!$user) {
-    //         header("Location: " . $base_path);
-    //         exit();
-    //     }
-    //     if (!checkRoles(['admin'])) {
-    //         header("Location: " . $base_path);
-    //         exit();
-    //     }
-    //     $reviewsManagementView = new ReviewManagementView();
-    //     $reviewsManagementView->displayReviewsPage();
-    //     break;
-    // case '/admin/styles':
-    //     if (!$user) {
-    //         header("Location: " . $base_path);
-    //         exit();
-    //     }
-    //     if (!checkRoles(['admin'])) {
-    //         header("Location: " . $base_path);
-    //         exit();
-    //     }
-    //     $stylesManagementView = new StylesManagementView();
-    //     $stylesManagementView->displayUpdateStylesPage();
-    //     break;
-
-    // case '':
-    //     $homeView = new HomeView();
-    //     $homeView->displayHomePage();
-    //     break;
-    // case '/brands':
-    //     $brandsView = new BrandsView();
-    //     if (!isset($_GET['id'])) {
-    //         $brandsView->displayBrandsPage();
-    //         break;
-    //     }
-    //     $brandsView->displayBrandByIdPage();
-    //     break;
-    // case '/auth/profile':
-    //     if (!$user) {
-    //         header("Location: " . $base_path);
-    //         exit();
-    //     }
-    //     $myProfileView = new MyProfileView();
-    //     $myProfileView->displayProfilePage();
-    //     break;
-    // case '/compare':
-    //     $compareView = new CompareView();
-    //     if (!isset($_GET['id'])) {
-    //         $compareView->displayCompareHomePage();
-    //         break;
-    //     }
-    //     $compareView->displayComparePage();
-    //     break;
-    // case '/vehicles':
-    //     $vehiclesView = new VehiclesView();
-    //     if (!isset($_GET['id'])) {
-    //         $vehiclesView->displayVehiclesPage();
-    //         break;
-    //     }
-    //     $vehiclesView->displayVehicleByIdPage();
-    //     break;
-    // case '/news':
-    //     $newsView = new NewsView();
-    //     if (!isset($_GET['id'])) {
-    //         $newsView->displayNewsHomePage();
-    //         break;
-    //     }
-    //     $newsView->displayNewsByIdPage();
-    //     break;
-    // case '/reviews':
-    //     $reviewsView = new ReviewsView();
-    //     if (!isset($_GET['id'])) {
-    //         $reviewsView->displayReviewsHomePage();
-    //         break;
-    //     }
-    //     $reviewsView->displayVehicleReviewsByIdPage();
-    //     break;
-
     default:
-        $homeController = new HomeController();
-        $homeController->getCars();
-        // $homeView = new HomeView();
-        // $homeView->displayHomeView();
+        $homeView = new HomeView();
+        $homeView->displayHomeView();
         break;
 }
 ?>

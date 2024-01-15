@@ -31,7 +31,7 @@ class CompareController {
                     $markId = $marksModel->getMarkByName($mark);
                     $carRow = $carsModel->getCarByData($markId['markid'], $model, $version, $year);
                     $carId = $carRow[0]['carid'];
-                    $carInfo = $carsModel->getCarsFeatures($carId);
+                    $carInfo = $carsModel->getCarsWithFeatures($carId);
                     echo $carInfo[2]['feature_value'];
                     array_push($cars, $carInfo);
                 }
